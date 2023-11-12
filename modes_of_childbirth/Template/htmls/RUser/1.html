@@ -1,0 +1,151 @@
+{% extends 'RUser/design.html' %}
+
+{% block userblock %}
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+<style>
+	body {
+		background-color: #f5f5f5;
+		font-family: Arial, sans-serif;
+	}
+
+	h1 {
+		font-family: 'Fredoka One', cursive;
+		font-size: 32px;
+		color: #333;
+		margin-bottom: 30px;
+	}
+
+	.container-fluid {
+		padding: 50px;
+	}
+
+	.container {
+		background-color: #fff;
+		padding: 50px;
+	}
+
+	.text-uppercase {
+		font-family: 'Righteous', cursive;
+		text-transform: uppercase;
+		color: #333;
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+
+	input,
+	textarea {
+		font-family: Aldrich, sans-serif;
+		font-size: 15px;
+		padding: 5px;
+		border: 1px solid #ccc;
+		border-radius: 2px;
+		background-color: #fff;
+		color: #333;
+	}
+
+	input[type="file"] {
+		border: none;
+		padding: 0;
+		background-color: transparent;
+	}
+
+	input[type="submit"] {
+		background-color: #6c757d;
+		color: #fff;
+		border: none;
+		padding: 10px 20px;
+		cursor: pointer;
+	}
+
+	hr {
+		border: 1px solid #ccc;
+		margin: 30px 0;
+	}
+
+	fieldset {
+		border: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	th,
+	td {
+		text-align: left;
+		padding: 8px;
+	}
+
+	tr:nth-child(even) {
+		background-color: #f2f2f2;
+	}
+
+	.style1 {
+		color: #ff0000;
+		font-weight: bold;
+	}
+
+	.style4 {
+		color: #ffff00;
+		font-weight: bold;
+	}
+
+	.style5 {
+		color: #ff0000;
+		font-weight: bold;
+		font-style: italic;
+	}
+</style>
+
+<body>
+	<div class="container-fluid">
+		<div>
+
+			<h1>Browse ChildBirth Data Sets</h1>
+
+			<div class="row">
+				<div class="col-md-5">
+					<form action="{% url 'Add_DataSet_Details' %}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="excel_file" class="text-uppercase">Upload excel file</label>
+							<input type="file" id="excel_file" name="excel_file" required="required">
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Upload">
+						</div>
+					</form>
+
+					<hr>
+
+					<fieldset>
+						<legend class="text-uppercase">Child Birth Data</legend>
+						<table>
+							<thead>
+								<tr>
+									<th class="style1">Child Name</th>
+									<th class="style1">Birth Month</th>
+                                    <th class="style1">Birth Year</th>
+                                    <th class="style1">Birth Day</th>
+                                    <th class="style1">Height</th>
+                                    <th class="style1">Birth Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in excel_data %}
+                                <tr>
+                                {% for cell in row %}
+                                    <td>{{ cell }}</td>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>

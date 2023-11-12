@@ -1,0 +1,158 @@
+{% extends 'RUser/design.html' %}
+{% block userblock %}
+
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+
+
+		<style>
+
+
+
+    /* Style for the table */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #2874f0;
+        color: #fff;
+        font-weight: bold;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Style for the form */
+    form {
+        width: 80%;
+        margin: 50px auto;
+        text-align: center;
+    }
+    fieldset {
+        border: none;
+    }
+    input[type="text"], input[type="email"], select {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    input[type="submit"] {
+        background-color: #2874f0;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+        background-color: #26509e;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+			body {background-color:#f5f5f5;}
+			.container-fluid {padding:50px;}
+			.container{background-color:white;padding:50px;}
+			#title{font-family: 'Fredoka One', cursive;
+}
+			.text-uppercase{
+			font-family: 'Righteous', cursive;
+
+			}
+			input,textarea{
+			font-family:Aldrich;
+			font-size:15px;
+			}
+		.style1 {
+	color: #2874f0;
+	font-weight: bold;
+}
+.style4 {color: #FFFF00; font-weight: bold; }
+        .style5 {color: #2874f0; font-weight: bold; }
+        </style>
+
+	<body>
+	<div class="container-fluid">
+		<div >
+
+			<div class="row">
+				<div class="col-md-5">
+ 					<form action="{% url 'Add_DataSet_Details' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}<span class="style5">Browse ChildBirth Data Sets</span>
+              <input type="file"
+                   title="Upload excel file"
+                   name="excel_file"
+                   style="border: 1px solid black; padding: 5px;"
+                   required="required">
+            <p>
+            <input type="submit"
+                   value="Upload"
+                   style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
+        </form>
+
+        <p></p>
+
+
+        <hr><fieldset><form role="form" method="POST" >
+                    <table border="5" bordercolor="#f5f5f5">
+
+                        <tr><td bgcolor="#2874f0"><span class="style8 table"> Child Name</span></td>
+                        <td bgcolor="#2874f0" ><span class="style8 table">Birth Month</span></td>
+                        <td bgcolor="#2874f0"><span class="style8 table">Birth Year</span></td>
+                        <td bgcolor="#2874f0"><span class="style8 table">Birth Day</span></td>
+                        <td bgcolor="#2874f0"><span class="style8 table">Height</span></td>
+                        <td bgcolor="#2874f0"><span class="style8 table">Birth Remark</span></td>
+                      </tr>
+
+
+        {% for row in excel_data %}
+<tr>
+            {% for cell in row %}
+                     <td bgcolor="white">   {{ cell }}&nbsp;&nbsp&nbsp;&nbsp;
+            {% endfor %}
+
+            <br></td></tr>
+        {% endfor %}
+                  </table>
+
+{{obj}}
+
+						</fieldset>
+					</form>
+				</div>
+
+
+				<div class="col-md-2">
+					<!-------null------>
+				</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+Add_DataSet_Details
